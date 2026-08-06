@@ -1,0 +1,18 @@
+[package]
+name = "rivulet-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "rivulet"
+path = "src/main.rs"
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+rivulet-crdt = { path = "../rivulet-crdt" }
+rivulet-storage = { path = "../rivulet-storage" }
+clap = { version = "4", features = ["derive"] }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = "0.3"
