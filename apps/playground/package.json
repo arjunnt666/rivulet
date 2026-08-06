@@ -1,0 +1,5 @@
+{
+  "name": "playground",
+  "private": true,
+  "scripts": { "dev": "echo open playground when ui exists" }
+}

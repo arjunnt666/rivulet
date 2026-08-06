@@ -1,0 +1,10 @@
+{
+  "name": "rivulet-relay-server",
+  "version": "0.4.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "node src/index.js"
+  }
+}

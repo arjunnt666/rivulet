@@ -1,0 +1,5 @@
+{
+  "name": "docs-site",
+  "private": true,
+  "scripts": { "dev": "echo docs site placeholder" }
+}
