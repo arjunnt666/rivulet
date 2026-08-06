@@ -1,0 +1,9 @@
+{
+  "name": "@rivulet/js",
+  "version": "0.4.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": { "build": "tsc", "test": "node --test" },
+  "devDependencies": { "typescript": "^5.4.0" }
+}

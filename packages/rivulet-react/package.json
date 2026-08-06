@@ -1,0 +1,7 @@
+{
+  "name": "@rivulet/react",
+  "version": "0.4.1",
+  "type": "module",
+  "peerDependencies": { "react": "^18 || ^19", "@rivulet/js": "0.4.1" },
+  "scripts": { "build": "tsc" }
+}
