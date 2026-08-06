@@ -1,0 +1,17 @@
+[package]
+name = "rivulet-sync"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Sync protocol, transport adapters, and session management"
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+rivulet-crdt = { path = "../rivulet-crdt" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+bytes = { workspace = true }

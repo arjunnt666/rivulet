@@ -1,0 +1,11 @@
+[package]
+name = "rivulet-presence"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }

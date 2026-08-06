@@ -1,0 +1,9 @@
+[package]
+name = "rivulet-crypto"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+thiserror = { workspace = true }

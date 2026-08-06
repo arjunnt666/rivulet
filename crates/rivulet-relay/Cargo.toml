@@ -1,0 +1,12 @@
+[package]
+name = "rivulet-relay"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+rivulet-sync = { path = "../rivulet-sync" }
+serde = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }

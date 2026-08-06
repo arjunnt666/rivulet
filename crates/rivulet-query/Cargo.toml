@@ -1,0 +1,12 @@
+[package]
+name = "rivulet-query"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rivulet-core = { path = "../rivulet-core" }
+rivulet-crdt = { path = "../rivulet-crdt" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
