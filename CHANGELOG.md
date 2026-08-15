@@ -1,14 +1,12 @@
 # Changelog
 
-## 0.4.1
-- presence cursors no longer teleport on reconnect (most of the time)
-- query planner stops panicking on empty docs
-- relay: backpressure actually does something now
+## 0.1.1 — unreleased
 
-## 0.4.0
-- text crdt: better concurrent split/merge
-- e2ee experimental flag
-- solidjs bindings (yes, someone asked)
+- clarify presence fanout behavior when a peer drops mid-edit
+- note that offline queue compaction is still naive
+- docs: mention optional relay is best-effort, not authoritative
 
-## 0.3.0
-- first public release that didn't immediately explode
+## 0.1.0
+
+- initial public skeleton
+- crdt core types, presence stubs, optional relay surface
