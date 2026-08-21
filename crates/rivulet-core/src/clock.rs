@@ -30,6 +30,13 @@ impl VersionVector {
         Dot { actor, counter: next }
     }
 
+    pub fn observe(&mut self, dot: Dot) {
+        let cur = self.get(&dot.actor);
+        if dot.counter > cur {
+            self.entries.insert(dot.actor, dot.counter);
+        }
+    }
+
     pub fn observes(&self, dot: &Dot) -> bool {
         self.get(&dot.actor) >= dot.counter
     }
@@ -73,5 +80,17 @@ mod tests {
         right.increment(a);
         left.merge(&right);
         assert_eq!(left.get(&a), 2);
+    }
+
+    #[test]
+    fn observe_remote_dot() {
+        let a = ActorId::new();
+        let mut remote = VersionVector::new();
+        let d = remote.increment(a);
+        remote.increment(a);
+        let mut local = VersionVector::new();
+        local.observe(d);
+        assert!(local.observes(&d));
+        assert_eq!(local.get(&a), 1);
     }
 }

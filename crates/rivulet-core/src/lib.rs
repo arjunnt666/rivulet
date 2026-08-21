@@ -8,6 +8,6 @@ pub mod op;
 
 pub use actor::ActorId;
 pub use clock::{Dot, VersionVector};
-pub use document::{DocId, Document};
+pub use document::{push_pull, DocId, Document};
 pub use error::RivuletError;
 pub use op::{Op, OpId, OpPayload};

@@ -19,3 +19,4 @@ jobs:
         run: |
           cargo build -p rivulet-cli
           ./target/debug/rivulet version
+          ./target/debug/rivulet demo

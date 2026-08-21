@@ -342,6 +342,7 @@ dependencies = [
  "rivulet-core",
  "rivulet-crdt",
  "rivulet-storage",
+ "serde_json",
  "tokio",
  "tracing",
  "tracing-subscriber",
