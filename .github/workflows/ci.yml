@@ -4,32 +4,18 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   rust:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    continue-on-error: true
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-        continue-on-error: true
-      - run: cargo check --workspace || true
-        continue-on-error: true
-      - run: cargo test --workspace || true
-        continue-on-error: true
-
-  js:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-        continue-on-error: true
-      - run: npm install || true
-        continue-on-error: true
-      - run: npm run build || true
-        continue-on-error: true
+      - name: cargo test
+        run: cargo test --workspace -- --nocapture
+      - name: cli smoke
+        run: |
+          cargo build -p rivulet-cli
+          ./target/debug/rivulet version

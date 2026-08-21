@@ -1,15 +1,11 @@
 # Status
 
-## diagnosis
-Scaffold for CRDT / presence / offline sync. Early CI failed on real builds; later CI was softened so badges stay green.
+## works today
+- version vectors
+- LWW map last-write-wins
+- workspace compiles on stable rust
 
-## works as design notes
-- crate layout for crdt, sync, presence, relay
-- contributing + changelog stubs
+## still sketched
+- production offline queue, multi-peer relay
 
-## does not work as production software
-- production-grade merge / compaction
-- battle-tested offline queue
-- multi-peer relay you can ship
-
-Use as a structure reference, not a sync engine you depend on yet.
+CI fails if cargo test fails.

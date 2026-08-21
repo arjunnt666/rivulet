@@ -1,4 +1,7 @@
 //! CRDT zoo.
+//!
+//! Not inventing new math — just wiring the usual suspects so apps can
+//! stop hand-rolling last-write-wins maps at 2am.
 
 pub mod types;
 pub mod apply;
