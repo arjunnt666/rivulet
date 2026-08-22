@@ -1,31 +1,15 @@
-# rivulet
+rivulet, as far as I have actually proven
 
-local-first sync pieces that compile.
+1. version vectors increment, merge, and notice remote dots. that part has tests.
 
-version vectors, ops, two peers that actually converge after push/pull. the hard merge edge cases are still written down more than proven.
+2. a document has local_op and apply. apply does not steal the local actor counter. I got that wrong once, so it is now a test, not a comment.
 
-not a collab product. a CRDT bag you can test without a relay.
+3. two peers in one process exchange missing ops and finish with the same set. `rivulet demo` is that dance.
 
-## works today
+4. the nasty merge cases are still more written down than proven. I do not have a production offline queue or a relay I would put on the internet.
 
-- version vector increment / merge / observe remote dots
-- document local_op vs apply (apply does not steal the local actor counter)
-- two peers exchange missing ops and end with the same set
-- `rivulet demo`
+If you want to watch the two peers converge:
 
-## does not work yet
+cargo test --workspace && cargo build -p rivulet-cli && ./target/debug/rivulet demo
 
-- production offline queue
-- multi-peer relay you would ship
-
-## try it
-
-```bash
-cargo test --workspace
-cargo build -p rivulet-cli
-./target/debug/rivulet demo
-```
-
-## license
-
-apache-2.0
+Apache-2.0
