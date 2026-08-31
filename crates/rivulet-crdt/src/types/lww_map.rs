@@ -1,7 +1,9 @@
 use rivulet_core::clock::Dot;
+use rivulet_core::op::{Op, OpPayload};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
+
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 struct Entry {
@@ -43,7 +45,24 @@ impl LwwMap {
     pub fn get(&self, key: &str) -> Option<&Value> {
         self.entries.get(key).and_then(|e| e.value.as_ref())
     }
+
+    pub fn apply_op(&mut self, op: &Op) {
+        match &op.payload {
+            OpPayload::MapSet { key, value } => self.set(key.clone(), value.clone(), op.id.dot),
+            OpPayload::MapDelete { key } => self.delete(key, op.id.dot),
+            _ => {}
+        }
+    }
+
+    pub fn from_ops(ops: &[Op]) -> Self {
+        let mut map = Self::new();
+        for op in ops {
+            map.apply_op(op);
+        }
+        map
+    }
 }
+
 
 #[cfg(test)]
 mod tests {
@@ -64,4 +83,34 @@ mod tests {
         map.set("k", serde_json::json!("old"), d1);
         assert_eq!(map.get("k").unwrap(), &serde_json::json!("b"));
     }
+
+    #[test]
+    fn two_peers_same_key_agree() {
+        use rivulet_core::{push_pull, ActorId, Document, OpPayload};
+        let alice = ActorId::new();
+        let bob = ActorId::new();
+        let mut a = Document::new();
+        let mut b = Document::new();
+        b.id = a.id;
+        a.local_op(
+            alice,
+            OpPayload::MapSet {
+                key: "title".into(),
+                value: serde_json::json!("hello"),
+            },
+        );
+        b.local_op(
+            bob,
+            OpPayload::MapSet {
+                key: "title".into(),
+                value: serde_json::json!("world"),
+            },
+        );
+        push_pull(&mut a, &mut b);
+        let ma = LwwMap::from_ops(&a.ops);
+        let mb = LwwMap::from_ops(&b.ops);
+        assert_eq!(ma.get("title"), mb.get("title"));
+        assert!(ma.get("title").is_some());
+    }
 }
+
